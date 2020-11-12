@@ -16,46 +16,26 @@ $(function() {
             coatHTML = getcoatHTML(coatObj);
         coatsWrapper.append(coatHTML);
     }
-    const overlayContentWrapper = $(".overlay-content-wrapper"),
-        itemWrapper = $(".item-wrapper")
-        getitemcoatHTML = function(item) {
-            return `<div class="item-wrapper" data-item=${item.id}>
-            <div class="item-image-wrapper" style="background-image: url(assets/coats/${item.imgUrl}></div>
-            <div class="item-details-wrapper">
-                <div class="item-name-wrapper">${item.name}</div>
-                <div class="item-price-wrapper">${item.currency}${item.price}</div>
-                <div class="item-size-wrapper">
-                    Your Size:<br>
-                    <div>
-                    <span>S</span>
-                    <span>M</span>
-                    <span>L</span>
-                    <span>XL</span>
-                    </div>
-                </div>
-                <div class="item-buttons-wrapper">
-                    <button type="button">Details</button>
-                    <button type="button">Order</button>
-                    <button type="button">Payment</button>
-                </div>
-                <div class="item-composition-and-country-wrapper">
-                    <div class="composition-wrapper">
-                        Composition<br>
-                        <span class="composition-detail-wrapper">${item.composition}</span>
-                    </div>
-                    <div class="country-wrapper">
-                        Country<br>
-                        <span class="country-detail-wrapper">${item.country}</span>
-                    </div>
-                </div>
-                <div class="item-care-wrapper">
-                    <div>Care</div>
-                    <div class="care-detail-wrapper">${item.care}</div>
-                </div>
-                <div class="item-add-to-cart-wrapper">
-                    <button type="button">Add to cart</button>
-                </div>
-            </div>
-        </div>`
+    const overlay = $(".overlay")
+    coatsWrapper.delegate(".single-coat-wrapper", "click", function(){
+        let coatID = $(this).data("id")
+        console.log(coatID); 
+        for(let i=0; i < coatItem.length; i++){
+            let singleCoatObj = coatItem[i]
+            if(singleCoatObj.id == coatID){
+                console.log(singleCoatObj);
+                $(".item-image-wrapper").css("backgroundImage", `url(assets/coats/${singleCoatObj.imgUrl})`);
+                $(".item-name-wrapper").text(`${singleCoatObj.name}`);
+                $(".item-price-wrapper").text(`${singleCoatObj.currency}${singleCoatObj.price}`);
+                $(".composition-detail-wrapper").text(`${singleCoatObj.composition}`);
+                $(".country-detail-wrapper").text(`${singleCoatObj.country}`);
+                $(".care-detail-wrapper").text(`${singleCoatObj.care}`);
+           }
         }
+        overlay.fadeIn();
+    })
+    const overlayExit = $(".overlay-exit")
+    overlayExit.on("click", function(){
+        overlay.fadeOut();
+    })
 })
