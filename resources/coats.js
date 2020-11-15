@@ -8,8 +8,10 @@ $(function() {
             <div class="price-wrapper">${item.currency}${item.price}</div>
         </div>
     </div>`
-    }
-    let coatItem = products.coats
+    };
+
+    //un pic de atentie la denumiri, este un pic confusing, aici ar fi corect sa fi folosit coatsItems pentru ca sunt toate, nu doar 1
+    let coatItem = products.coats;
     console.log(coatItem);
     for(let i=0; i < coatItem.length; i++) {
         let coatObj = coatItem[i],
